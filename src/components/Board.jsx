@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import Cell from './Cell';
+import Grid from './Grid';
+import { ContextProvider } from '../context/ContextProvider';
 
 const Board = () => {
-  const grid = [];
-
-  for (let y = 5; y >= 0; y -= 1) {
-    for (let x = 0; x < 7; x += 1) {
-      grid.push([x, y]);
-    }
-  }
-
-  console.log('const grid = ', grid);
-
+  const { boardResult, isRedsNext } = useContext(ContextProvider);
   return (
-    <BoardSize>
-      {grid.map(coordinate => (
-        <Cell key={[coordinate]} coordinate={coordinate} />
-      ))}
-    </BoardSize>
+    <>
+      <div>
+        Next Player:
+        {isRedsNext ? 'Red' : 'Yellow'}
+      </div>
+      <BoardSize>
+        {boardResult.map(arr => (
+          <Grid key={arr} eachGrid={arr} />
+        ))}
+      </BoardSize>
+    </>
   );
 };
 
 const BoardSize = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
   @media (min-width: 769px) {
     margin-top: 150px;
     width: 1024px;
