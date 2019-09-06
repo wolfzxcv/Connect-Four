@@ -5,9 +5,9 @@ import Cell from './Cell';
 const Board = () => {
   const grid = [];
 
-  for (let col = 5; col >= 0; col -= 1) {
-    for (let row = 0; row < 7; row += 1) {
-      grid.push([col, row]);
+  for (let y = 5; y >= 0; y -= 1) {
+    for (let x = 0; x < 7; x += 1) {
+      grid.push([x, y]);
     }
   }
 
