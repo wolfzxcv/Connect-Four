@@ -1,13 +1,13 @@
 import React from 'react';
-
+import ContextProvider from './context/ContextProvider';
 import Board from './components/Board';
 
 const App = () => {
   return (
-    <div>
-      <div>Connect 4 </div>
+    <ContextProvider>
+      <div>Connect Four</div>
       <Board />
-    </div>
+    </ContextProvider>
   );
 };
 
