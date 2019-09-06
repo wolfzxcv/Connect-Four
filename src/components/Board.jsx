@@ -14,9 +14,9 @@ const Board = () => {
   } = useContext(ContextProvider);
 
   useEffect(() => {
-    setBoardResult(JSON.parse(localStorage.getItem('Game result')) || board);
-
     const dataInLS = JSON.parse(localStorage.getItem('Game result'));
+    setBoardResult(dataInLS || board);
+
     if (dataInLS) {
       const resultR = dataInLS.filter(x => x[2] === 'red');
       const resultY = dataInLS.filter(x => x[2] === 'yellow');
