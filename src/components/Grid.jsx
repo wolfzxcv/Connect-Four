@@ -14,7 +14,7 @@ const Grid = ({ eachGrid }) => {
     const wholeColumn = boardResult
       .filter(x => x[0] === eachGrid[0])
       .sort((a, b) => a[1] - b[1]);
-    console.log('whole column', wholeColumn);
+    // console.log('whole column', wholeColumn);
 
     // check if column is still available
     const checkColumnAvailable = wholeColumn.filter(
@@ -27,6 +27,12 @@ const Grid = ({ eachGrid }) => {
 
       setBoardResult(boardResult);
       setIsRedsNext(!isRedsNext);
+      localStorage.setItem('Game result', JSON.stringify(boardResult));
+
+      const resultR = boardResult.filter(x => x[2] === 'red');
+      const resultY = boardResult.filter(x => x[2] === 'yellow');
+      console.log('red', resultR);
+      console.log('yellow', resultY);
     }
   };
 

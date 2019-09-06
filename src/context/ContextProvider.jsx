@@ -10,14 +10,22 @@ export default props => {
     }
   }
 
+  const [boardResult, setBoardResult] = useState([]);
   const [isRedsNext, setIsRedsNext] = useState(true);
-  const [boardResult, setBoardResult] = useState(board);
+
+  const playAgain = () => {
+    window.localStorage.clear();
+    setBoardResult(board);
+    setIsRedsNext(true);
+  };
 
   const value = {
-    isRedsNext,
-    setIsRedsNext,
+    board,
     boardResult,
     setBoardResult,
+    isRedsNext,
+    setIsRedsNext,
+    playAgain,
   };
 
   return <ContextProvider.Provider value={value} {...props} />;
