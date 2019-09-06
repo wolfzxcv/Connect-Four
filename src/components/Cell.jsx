@@ -21,7 +21,9 @@ const Cell = ({ coordinate }) => {
 };
 
 Cell.propTypes = {
-  coordinate: PropTypes.number.isRequired,
+  coordinate: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
 };
 
 const InlineBlock = styled.div`
