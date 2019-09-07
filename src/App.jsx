@@ -5,7 +5,6 @@ import Board from './components/Board';
 const App = () => {
   return (
     <ContextProvider>
-      <div>Connect Four</div>
       <Board />
     </ContextProvider>
   );
