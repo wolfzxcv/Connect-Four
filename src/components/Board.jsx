@@ -11,6 +11,7 @@ const Board = () => {
     isRedsNext,
     setIsRedsNext,
     playAgain,
+    winner,
   } = useContext(ContextProvider);
 
   useEffect(() => {
@@ -38,6 +39,9 @@ const Board = () => {
       <button type='button' onClick={() => playAgain()}>
         Restart the game
       </button>
+
+      {winner !== '' && <div>Winner is {winner}</div>}
+
       <BoardSize>
         {boardResult.map(arr => (
           <Grid key={arr} eachGrid={arr} />

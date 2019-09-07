@@ -9,13 +9,13 @@ const Grid = ({ eachGrid }) => {
     setBoardResult,
     isRedsNext,
     setIsRedsNext,
-    checkIfAnyoneWins,
+    checkIfWin,
     stopGame,
   } = useContext(ContextProvider);
 
   const handleLocation = () => {
     // console.log('cell result', eachGrid);
-    if (stopGame === false) {
+    if (!stopGame) {
       const wholeColumn = boardResult
         .filter(x => x[0] === eachGrid[0])
         .sort((a, b) => a[1] - b[1]);
@@ -23,7 +23,7 @@ const Grid = ({ eachGrid }) => {
 
       // check if column is still available
       const checkColumnAvailable = wholeColumn.filter(
-        x => x[1] === 6 && x[2] === 'white'
+        x => x[1] === 5 && x[2] === 'white'
       );
 
       if (checkColumnAvailable.length > 0) {
@@ -33,15 +33,12 @@ const Grid = ({ eachGrid }) => {
         setBoardResult(boardResult);
         setIsRedsNext(!isRedsNext);
         localStorage.setItem('Game result', JSON.stringify(boardResult));
-      }
 
-      // start to check if anyone wins
-      if (boardResult.filter(x => x[2] !== 'white').length > 7) {
-        const resultR = boardResult.filter(x => x[2] === 'red');
-        const resultY = boardResult.filter(x => x[2] === 'yellow');
-
-        checkIfAnyoneWins(resultR);
-        checkIfAnyoneWins(resultY);
+        const arrForOnlyColor = [];
+        for (let i = 0; i < boardResult.length; i += 7) {
+          arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
+        }
+        checkIfWin(arrForOnlyColor);
       }
     }
   };
