@@ -31,18 +31,18 @@ const Grid = ({ eachGrid }) => {
       if (checkColumnAvailable.length > 0) {
         const placeHere = wholeColumn.find(x => x[2] === 'white');
         placeHere[2] = isRedsNext ? 'red' : 'yellow';
+
+        setBoardResult(boardResult);
+        setIsRedsNext(!isRedsNext);
+
         setBoardHistory([...boardHistory, boardResult]);
         localStorage.setItem(
           'Game history',
           JSON.stringify([...boardHistory, boardResult])
         );
-
-        setBoardResult(boardResult);
-        setIsRedsNext(!isRedsNext);
+        console.log('place history', [...boardHistory, boardResult]);
 
         // console.log('board result', boardResult);
-
-        console.log('board history from place', [...boardHistory, boardResult]);
 
         const arrForOnlyColor = [];
         for (let i = 0; i < boardResult.length; i += 7) {

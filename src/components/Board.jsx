@@ -51,7 +51,7 @@ const Board = () => {
 
       {winner !== '' && <div>Winner is {winner}</div>}
 
-      {boardHistory.length > 1 && (
+      {boardHistory.length > 0 && (
         <button type='button' onClick={() => handleUndo()}>
           Undo movement
         </button>

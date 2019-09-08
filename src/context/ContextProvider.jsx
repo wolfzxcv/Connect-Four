@@ -20,9 +20,15 @@ export default props => {
     const dataSaveInLS = boardHistory.slice(0, -1);
 
     setBoardHistory(dataSaveInLS);
-    setBoardResult(dataSaveInLS.pop());
+
     localStorage.setItem('Game history', JSON.stringify(dataSaveInLS));
-    console.log('undo History', boardHistory.slice(0, -1));
+    console.log('undo History', dataSaveInLS);
+
+    if (dataSaveInLS.length - 1 > 0) {
+      setBoardResult(dataSaveInLS[dataSaveInLS.length - 1]);
+    } else {
+      setBoardResult(board);
+    }
 
     const arrForOnlyColor = [];
     for (let i = 0; i < boardResult.length; i += 7) {
