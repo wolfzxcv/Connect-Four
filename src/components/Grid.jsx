@@ -31,15 +31,14 @@ const Grid = ({ eachGrid }) => {
       if (checkColumnAvailable.length > 0) {
         const placeHere = wholeColumn.find(x => x[2] === 'white');
         placeHere[2] = isRedsNext ? 'red' : 'yellow';
-
-        setBoardResult(boardResult);
-        setIsRedsNext(!isRedsNext);
         setBoardHistory([...boardHistory, boardResult]);
-
         localStorage.setItem(
           'Game history',
           JSON.stringify([...boardHistory, boardResult])
         );
+
+        setBoardResult(boardResult);
+        setIsRedsNext(!isRedsNext);
 
         // console.log('board result', boardResult);
 
@@ -49,6 +48,7 @@ const Grid = ({ eachGrid }) => {
         for (let i = 0; i < boardResult.length; i += 7) {
           arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
         }
+        console.log('current board', arrForOnlyColor);
         checkIfWin(arrForOnlyColor);
       }
     }

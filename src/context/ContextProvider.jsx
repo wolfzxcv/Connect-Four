@@ -17,19 +17,18 @@ export default props => {
   const [winner, setWinner] = useState('');
 
   const handleUndo = () => {
-    setBoardHistory(boardHistory.slice(0, -1));
-    //  setBoardResult(boardHistory.slice(0, -1).pop());
-    localStorage.setItem(
-      'Game history',
-      JSON.stringify(boardHistory.slice(0, -1))
-    );
+    const dataSaveInLS = boardHistory.slice(0, -1);
+
+    setBoardHistory(dataSaveInLS);
+    setBoardResult(dataSaveInLS.pop());
+    localStorage.setItem('Game history', JSON.stringify(dataSaveInLS));
     console.log('undo History', boardHistory.slice(0, -1));
 
     const arrForOnlyColor = [];
     for (let i = 0; i < boardResult.length; i += 7) {
       arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
     }
-    console.log(arrForOnlyColor);
+    console.log('new board', arrForOnlyColor);
   };
 
   const playAgain = () => {
