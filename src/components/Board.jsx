@@ -6,36 +6,33 @@ import { ContextProvider } from '../context/ContextProvider';
 const Board = () => {
   const {
     board,
-    boardHistory,
-    setBoardHistory,
     boardResult,
     setBoardResult,
     isRedsNext,
     setIsRedsNext,
     playAgain,
     winner,
-    handleUndo,
+    undo,
+    redo,
+    boardHistory,
+    setBoardHistory,
   } = useContext(ContextProvider);
 
   useEffect(() => {
-    const dataInLS = JSON.parse(localStorage.getItem('Game history'));
+    const dataInLS = JSON.parse(localStorage.getItem('Game result'));
+    setBoardResult(dataInLS || board);
+    setBoardHistory(dataInLS || board);
+    console.log('render', boardHistory);
 
-    if (dataInLS.length > 0) {
-      setBoardHistory(dataInLS);
-      console.log('board history from rendering', dataInLS);
-      const getBoardResult = dataInLS[dataInLS.length - 1];
-      setBoardResult(getBoardResult);
-
-      const resultR = getBoardResult.filter(x => x[2] === 'red');
-      const resultY = getBoardResult.filter(x => x[2] === 'yellow');
+    if (dataInLS) {
+      const resultR = dataInLS.filter(x => x[2] === 'red');
+      const resultY = dataInLS.filter(x => x[2] === 'yellow');
 
       if (resultR.length > resultY.length) {
         setIsRedsNext(false);
       } else {
         setIsRedsNext(true);
       }
-    } else {
-      setBoardResult(board);
     }
   }, []);
 
@@ -51,11 +48,12 @@ const Board = () => {
 
       {winner !== '' && <div>Winner is {winner}</div>}
 
-      {boardHistory.length > 0 && (
-        <button type='button' onClick={() => handleUndo()}>
-          Undo movement
-        </button>
-      )}
+      <button type='button' onClick={undo} disabled={!undo}>
+        undo
+      </button>
+      <button type='button' onClick={redo} disabled={!redo}>
+        redo
+      </button>
 
       <BoardSize>
         {boardResult.map(arr => (

@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import useStateHistory from '../useStateHistory';
 
 export const ContextProvider = createContext();
 
@@ -10,36 +11,17 @@ export default props => {
     }
   }
 
-  const [boardHistory, setBoardHistory] = useState([]);
+  const [boardHistory, setBoardHistory, { undo, redo }] = useStateHistory([]);
   const [boardResult, setBoardResult] = useState([]);
   const [isRedsNext, setIsRedsNext] = useState(true);
   const [stopGame, setStopGame] = useState(false);
   const [winner, setWinner] = useState('');
 
-  const handleUndo = () => {
-    const dataSaveInLS = boardHistory.slice(0, -1);
-
-    setBoardHistory(dataSaveInLS);
-
-    localStorage.setItem('Game history', JSON.stringify(dataSaveInLS));
-    console.log('undo History', dataSaveInLS);
-
-    if (dataSaveInLS.length - 1 > 0) {
-      setBoardResult(dataSaveInLS[dataSaveInLS.length - 1]);
-    } else {
-      setBoardResult(board);
-    }
-
-    const arrForOnlyColor = [];
-    for (let i = 0; i < boardResult.length; i += 7) {
-      arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
-    }
-    console.log('new board', arrForOnlyColor);
-  };
-
   const playAgain = () => {
     window.localStorage.clear();
     setBoardResult(board);
+    setBoardHistory(board);
+    console.log('playAgain', boardHistory);
     setIsRedsNext(true);
     setStopGame(false);
     setWinner('');
@@ -122,9 +104,10 @@ export default props => {
     stopGame,
     setStopGame,
     winner,
+    undo,
+    redo,
     boardHistory,
     setBoardHistory,
-    handleUndo,
   };
 
   return <ContextProvider.Provider value={value} {...props} />;
