@@ -20,7 +20,7 @@ const Board = () => {
   useEffect(() => {
     const dataInLS = JSON.parse(localStorage.getItem('Game history'));
 
-    if (dataInLS) {
+    if (dataInLS.length > 0) {
       setBoardHistory(dataInLS);
       console.log('board history from rendering', dataInLS);
       const getBoardResult = dataInLS[dataInLS.length - 1];
@@ -51,7 +51,7 @@ const Board = () => {
 
       {winner !== '' && <div>Winner is {winner}</div>}
 
-      {boardHistory.length > 1 && (
+      {boardHistory.length > 0 && (
         <button type='button' onClick={() => handleUndo()}>
           Undo movement
         </button>
