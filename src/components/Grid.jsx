@@ -11,9 +11,11 @@ const Grid = ({ eachGrid }) => {
     setIsRedsNext,
     checkIfWin,
     stopGame,
+    boardHistory,
+    setBoardHistory,
   } = useContext(ContextProvider);
 
-  const handleLocation = () => {
+  const handlePlacedLocation = () => {
     // console.log('cell result', eachGrid);
     if (!stopGame) {
       const wholeColumn = boardResult
@@ -32,7 +34,16 @@ const Grid = ({ eachGrid }) => {
 
         setBoardResult(boardResult);
         setIsRedsNext(!isRedsNext);
-        localStorage.setItem('Game result', JSON.stringify(boardResult));
+        setBoardHistory([...boardHistory, boardResult]);
+
+        localStorage.setItem(
+          'Game history',
+          JSON.stringify([...boardHistory, boardResult])
+        );
+
+        // console.log('board result', boardResult);
+
+        console.log('board history from place', [...boardHistory, boardResult]);
 
         const arrForOnlyColor = [];
         for (let i = 0; i < boardResult.length; i += 7) {
@@ -45,7 +56,10 @@ const Grid = ({ eachGrid }) => {
 
   return (
     <InlineBlock>
-      <CellBG onClick={() => handleLocation(eachGrid)} eachGrid={eachGrid}>
+      <CellBG
+        onClick={() => handlePlacedLocation(eachGrid)}
+        eachGrid={eachGrid}
+      >
         <MarkedColor color={eachGrid[2]}>
           {` ${eachGrid[0]}, ${eachGrid[1]} `}
         </MarkedColor>

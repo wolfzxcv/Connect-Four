@@ -6,27 +6,36 @@ import { ContextProvider } from '../context/ContextProvider';
 const Board = () => {
   const {
     board,
+    boardHistory,
+    setBoardHistory,
     boardResult,
     setBoardResult,
     isRedsNext,
     setIsRedsNext,
     playAgain,
     winner,
+    handleUndo,
   } = useContext(ContextProvider);
 
   useEffect(() => {
-    const dataInLS = JSON.parse(localStorage.getItem('Game result'));
-    setBoardResult(dataInLS || board);
+    const dataInLS = JSON.parse(localStorage.getItem('Game history'));
 
     if (dataInLS) {
-      const resultR = dataInLS.filter(x => x[2] === 'red');
-      const resultY = dataInLS.filter(x => x[2] === 'yellow');
+      setBoardHistory(dataInLS);
+      console.log('board history from rendering', dataInLS);
+      const getBoardResult = dataInLS[dataInLS.length - 1];
+      setBoardResult(getBoardResult);
+
+      const resultR = getBoardResult.filter(x => x[2] === 'red');
+      const resultY = getBoardResult.filter(x => x[2] === 'yellow');
 
       if (resultR.length > resultY.length) {
         setIsRedsNext(false);
       } else {
         setIsRedsNext(true);
       }
+    } else {
+      setBoardResult(board);
     }
   }, []);
 
@@ -41,6 +50,12 @@ const Board = () => {
       </button>
 
       {winner !== '' && <div>Winner is {winner}</div>}
+
+      {boardHistory.length > 1 && (
+        <button type='button' onClick={() => handleUndo()}>
+          Undo movement
+        </button>
+      )}
 
       <BoardSize>
         {boardResult.map(arr => (

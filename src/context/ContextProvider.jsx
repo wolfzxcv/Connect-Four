@@ -10,10 +10,27 @@ export default props => {
     }
   }
 
+  const [boardHistory, setBoardHistory] = useState([]);
   const [boardResult, setBoardResult] = useState([]);
   const [isRedsNext, setIsRedsNext] = useState(true);
   const [stopGame, setStopGame] = useState(false);
   const [winner, setWinner] = useState('');
+
+  const handleUndo = () => {
+    setBoardHistory(boardHistory.slice(0, -1));
+    //  setBoardResult(boardHistory.slice(0, -1).pop());
+    localStorage.setItem(
+      'Game history',
+      JSON.stringify(boardHistory.slice(0, -1))
+    );
+    console.log('undo History', boardHistory.slice(0, -1));
+
+    const arrForOnlyColor = [];
+    for (let i = 0; i < boardResult.length; i += 7) {
+      arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
+    }
+    console.log(arrForOnlyColor);
+  };
 
   const playAgain = () => {
     window.localStorage.clear();
@@ -100,6 +117,9 @@ export default props => {
     stopGame,
     setStopGame,
     winner,
+    boardHistory,
+    setBoardHistory,
+    handleUndo,
   };
 
   return <ContextProvider.Provider value={value} {...props} />;
