@@ -40,15 +40,11 @@ const Board = () => {
 
   return (
     <>
-      <div>
-        Next Player:
-        {isRedsNext ? 'Red' : 'Yellow'}
-      </div>
-      <button type='button' onClick={() => playAgain()}>
-        Restart the game
-      </button>
-
-      {winner !== '' && <div>Winner is {winner}</div>}
+      {winner === '' ? (
+        <div> Next Player: {isRedsNext ? 'Red' : 'Yellow'}</div>
+      ) : (
+        <div>{`Winner is ${winner}`}</div>
+      )}
 
       <button type='button' onClick={undo} disabled={index < 0}>
         undo

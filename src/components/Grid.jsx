@@ -11,7 +11,6 @@ const Grid = ({ eachGrid }) => {
     setIsRedsNext,
     checkIfWin,
     stopGame,
-    boardHistory,
     setBoardHistory,
   } = useContext(ContextProvider);
 
