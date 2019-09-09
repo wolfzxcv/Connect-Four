@@ -14,6 +14,8 @@ const Board = () => {
     winner,
     undo,
     redo,
+    index,
+    history,
     boardHistory,
     setBoardHistory,
   } = useContext(ContextProvider);
@@ -48,10 +50,14 @@ const Board = () => {
 
       {winner !== '' && <div>Winner is {winner}</div>}
 
-      <button type='button' onClick={undo} disabled={!undo}>
+      <button type='button' onClick={undo} disabled={index < 0}>
         undo
       </button>
-      <button type='button' onClick={redo} disabled={!redo}>
+      <button
+        type='button'
+        onClick={redo}
+        disabled={index > history.length - 2 || index < 0}
+      >
         redo
       </button>
 

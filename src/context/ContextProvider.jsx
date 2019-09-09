@@ -12,21 +12,40 @@ export default props => {
   }
 
   // still have problem with history
-  const [boardHistory, setBoardHistory, { undo, redo }] = useStateHistory([]);
+  const [
+    boardHistory,
+    setBoardHistory,
+    { history, index, setIndex },
+  ] = useStateHistory([]);
   const [boardResult, setBoardResult] = useState([]);
   const [isRedsNext, setIsRedsNext] = useState(true);
   const [stopGame, setStopGame] = useState(false);
   const [winner, setWinner] = useState('');
 
+  const undo = () => {
+    if (index > 0) {
+      setIndex(index - 1);
+      console.log('show undo result', history[index - 1]);
+      setBoardResult(history[index - 1]);
+      console.log('undo boardHistory', boardHistory);
+    } else {
+      setBoardResult(board);
+    }
+  };
+
+  const redo = () => {
+    if (index + 1 < history.length - 1) {
+      setIndex(index + 1);
+      setBoardResult(history[index + 1]);
+      console.log('show redo result', history[index + 1]);
+      console.log('show redo index', index + 1);
+      console.log('redo boardHistory', boardHistory);
+    }
+  };
+
   const playAgain = () => {
     window.localStorage.clear();
-    setBoardResult(board);
-    setBoardHistory((boardHistory.length = 0));
-    setBoardHistory(board);
-    console.log('playAgain', board);
-    setIsRedsNext(true);
-    setStopGame(false);
-    setWinner('');
+    window.location.reload();
   };
 
   const announceWinner = win => {
@@ -110,6 +129,8 @@ export default props => {
     setBoardHistory,
     undo,
     redo,
+    index,
+    history,
   };
 
   return <ContextProvider.Provider value={value} {...props} />;
