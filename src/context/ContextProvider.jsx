@@ -22,14 +22,29 @@ export default props => {
   const [stopGame, setStopGame] = useState(false);
   const [winner, setWinner] = useState('');
 
+  const checkWhoNext = data => {
+    const resultR = data.filter(x => x[2] === 'red');
+    const resultY = data.filter(x => x[2] === 'yellow');
+
+    if (resultR.length > resultY.length) {
+      setIsRedsNext(false);
+    } else {
+      setIsRedsNext(true);
+    }
+  };
+
   const undo = () => {
     if (index > 0) {
       setIndex(index - 1);
       console.log('show undo result', history[index - 1]);
       setBoardResult(history[index - 1]);
-      console.log('undo boardHistory', boardHistory);
+      checkWhoNext(history[index - 1]);
+      console.log('show undo index', index - 1);
     } else {
       setBoardResult(board);
+      setIsRedsNext(true);
+      setIndex(-1);
+      console.log('undo, index reset to -1', -1);
     }
   };
 
@@ -37,9 +52,9 @@ export default props => {
     if (index + 1 < history.length - 1) {
       setIndex(index + 1);
       setBoardResult(history[index + 1]);
+      checkWhoNext(history[index + 1]);
       console.log('show redo result', history[index + 1]);
       console.log('show redo index', index + 1);
-      console.log('redo boardHistory', boardHistory);
     }
   };
 
@@ -120,6 +135,7 @@ export default props => {
     setBoardResult,
     isRedsNext,
     setIsRedsNext,
+    checkWhoNext,
     playAgain,
     checkIfWin,
     stopGame,

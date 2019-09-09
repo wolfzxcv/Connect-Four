@@ -10,8 +10,8 @@ const Grid = ({ eachGrid }) => {
     isRedsNext,
     setIsRedsNext,
     checkIfWin,
+    winner,
     stopGame,
-    boardHistory,
     setBoardHistory,
   } = useContext(ContextProvider);
 
@@ -46,6 +46,8 @@ const Grid = ({ eachGrid }) => {
         //   console.log('current board', arrForOnlyColor);
         checkIfWin(arrForOnlyColor);
       }
+    } else if (stopGame) {
+      alert(`Winner is ${winner}`);
     }
   };
 

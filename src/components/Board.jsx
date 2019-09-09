@@ -9,7 +9,7 @@ const Board = () => {
     boardResult,
     setBoardResult,
     isRedsNext,
-    setIsRedsNext,
+    checkWhoNext,
     playAgain,
     winner,
     undo,
@@ -27,28 +27,24 @@ const Board = () => {
     console.log('render', boardHistory);
 
     if (dataInLS) {
-      const resultR = dataInLS.filter(x => x[2] === 'red');
-      const resultY = dataInLS.filter(x => x[2] === 'yellow');
-
-      if (resultR.length > resultY.length) {
-        setIsRedsNext(false);
-      } else {
-        setIsRedsNext(true);
-      }
+      checkWhoNext(dataInLS);
     }
   }, []);
 
   return (
     <>
-      <div>
-        Next Player:
-        {isRedsNext ? 'Red' : 'Yellow'}
-      </div>
+      <p>
+        The first player to connect four of their discs <br />
+        horizontally, vertically, or diagonally wins the game.
+      </p>
       <button type='button' onClick={() => playAgain()}>
         Restart the game
       </button>
-
-      {winner !== '' && <div>Winner is {winner}</div>}
+      {winner === '' ? (
+        <div> Next Player: {isRedsNext ? 'Red' : 'Yellow'}</div>
+      ) : (
+        <div>{`Winner is ${winner}`}</div>
+      )}
 
       <button type='button' onClick={undo} disabled={index < 0}>
         undo
@@ -56,7 +52,7 @@ const Board = () => {
       <button
         type='button'
         onClick={redo}
-        disabled={index > history.length - 2 || index < 0}
+        disabled={index > history.length - 3}
       >
         redo
       </button>
