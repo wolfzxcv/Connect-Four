@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import useStateHistory from '../useStateHistory';
+import useStateHistory from '../hook/useStateHistory';
 
 export const ContextProvider = createContext();
 
@@ -11,6 +11,7 @@ export default props => {
     }
   }
 
+  // still have problem with history
   const [boardHistory, setBoardHistory, { undo, redo }] = useStateHistory([]);
   const [boardResult, setBoardResult] = useState([]);
   const [isRedsNext, setIsRedsNext] = useState(true);
@@ -20,8 +21,9 @@ export default props => {
   const playAgain = () => {
     window.localStorage.clear();
     setBoardResult(board);
+    setBoardHistory((boardHistory.length = 0));
     setBoardHistory(board);
-    console.log('playAgain', boardHistory);
+    console.log('playAgain', board);
     setIsRedsNext(true);
     setStopGame(false);
     setWinner('');
@@ -104,10 +106,10 @@ export default props => {
     stopGame,
     setStopGame,
     winner,
-    undo,
-    redo,
     boardHistory,
     setBoardHistory,
+    undo,
+    redo,
   };
 
   return <ContextProvider.Provider value={value} {...props} />;
