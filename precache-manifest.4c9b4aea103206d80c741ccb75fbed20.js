@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1e5cf2c341c3a1fff0df05a971446158",
+    "revision": "779b92ebe2342d3d05a90ff3eb126b9f",
     "url": "/Connect-Four/index.html"
   },
   {
-    "revision": "fe24feb50311d9ae46d4",
+    "revision": "ede7c94f135f2d33c895",
     "url": "/Connect-Four/static/css/main.a1738c8f.chunk.css"
   },
   {
-    "revision": "6bdc682bffe7f425675d",
-    "url": "/Connect-Four/static/js/2.65cc77fc.chunk.js"
+    "revision": "1c8f757a7c4841e2c829",
+    "url": "/Connect-Four/static/js/2.385eed34.chunk.js"
   },
   {
-    "revision": "fe24feb50311d9ae46d4",
-    "url": "/Connect-Four/static/js/main.cc28cb29.chunk.js"
+    "revision": "ede7c94f135f2d33c895",
+    "url": "/Connect-Four/static/js/main.76b13d8e.chunk.js"
   },
   {
     "revision": "5ec8fab371b3bd0dc3d4",
