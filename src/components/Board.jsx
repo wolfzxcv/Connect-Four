@@ -9,7 +9,7 @@ const Board = () => {
     boardResult,
     setBoardResult,
     isRedsNext,
-    setIsRedsNext,
+    checkWhoNext,
     playAgain,
     winner,
     undo,
@@ -27,14 +27,7 @@ const Board = () => {
     console.log('render', boardHistory);
 
     if (dataInLS) {
-      const resultR = dataInLS.filter(x => x[2] === 'red');
-      const resultY = dataInLS.filter(x => x[2] === 'yellow');
-
-      if (resultR.length > resultY.length) {
-        setIsRedsNext(false);
-      } else {
-        setIsRedsNext(true);
-      }
+      checkWhoNext(dataInLS);
     }
   }, []);
 
