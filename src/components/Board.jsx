@@ -21,9 +21,6 @@ const Board = () => {
   } = useContext(ContextProvider);
 
   useEffect(() => {
-    alert(
-      'The first player to connect four of their discs horizontally, vertically, or diagonally wins the game.'
-    );
     const dataInLS = JSON.parse(localStorage.getItem('Game result'));
     setBoardResult(dataInLS || board);
     setBoardHistory(dataInLS || board);
@@ -43,6 +40,13 @@ const Board = () => {
 
   return (
     <>
+      <p>
+        The first player to connect four of their discs <br />
+        horizontally, vertically, or diagonally wins the game.
+      </p>
+      <button type='button' onClick={() => playAgain()}>
+        Restart the game
+      </button>
       {winner === '' ? (
         <div> Next Player: {isRedsNext ? 'Red' : 'Yellow'}</div>
       ) : (
@@ -55,7 +59,7 @@ const Board = () => {
       <button
         type='button'
         onClick={redo}
-        disabled={index > history.length - 2 || index < 0}
+        disabled={index > history.length - 3}
       >
         redo
       </button>

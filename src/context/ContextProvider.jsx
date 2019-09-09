@@ -27,9 +27,11 @@ export default props => {
       setIndex(index - 1);
       console.log('show undo result', history[index - 1]);
       setBoardResult(history[index - 1]);
-      console.log('undo boardHistory', boardHistory);
+      console.log('show undo index', index - 1);
     } else {
       setBoardResult(board);
+      setIndex(-1);
+      console.log('undo, index reset to -1', -1);
     }
   };
 
@@ -39,7 +41,6 @@ export default props => {
       setBoardResult(history[index + 1]);
       console.log('show redo result', history[index + 1]);
       console.log('show redo index', index + 1);
-      console.log('redo boardHistory', boardHistory);
     }
   };
 
