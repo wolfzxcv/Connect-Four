@@ -33,22 +33,17 @@ const Grid = ({ eachGrid }) => {
         placeHere[2] = isRedsNext ? 'red' : 'yellow';
 
         setBoardResult(boardResult);
+        setBoardHistory(boardResult);
+        console.log('place', boardHistory);
         setIsRedsNext(!isRedsNext);
 
-        setBoardHistory([...boardHistory, boardResult]);
-        localStorage.setItem(
-          'Game history',
-          JSON.stringify([...boardHistory, boardResult])
-        );
-        console.log('place history', [...boardHistory, boardResult]);
-
-        // console.log('board result', boardResult);
+        localStorage.setItem('Game result', JSON.stringify(boardResult));
 
         const arrForOnlyColor = [];
         for (let i = 0; i < boardResult.length; i += 7) {
           arrForOnlyColor.push(boardResult.map(x => x[2]).slice(i, i + 7));
         }
-        console.log('current board', arrForOnlyColor);
+        //   console.log('current board', arrForOnlyColor);
         checkIfWin(arrForOnlyColor);
       }
     }
