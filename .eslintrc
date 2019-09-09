@@ -5,6 +5,7 @@
     "react/jsx-props-no-spreading": 0,
     "no-console": 0,
     "no-undef": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "no-alert": 0
   }
 }

@@ -21,6 +21,9 @@ const Board = () => {
   } = useContext(ContextProvider);
 
   useEffect(() => {
+    alert(
+      'The first player to connect four of their discs horizontally, vertically, or diagonally wins the game.'
+    );
     const dataInLS = JSON.parse(localStorage.getItem('Game result'));
     setBoardResult(dataInLS || board);
     setBoardHistory(dataInLS || board);
