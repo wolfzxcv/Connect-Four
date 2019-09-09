@@ -34,7 +34,7 @@ const Grid = ({ eachGrid }) => {
 
         setBoardResult(boardResult);
         setBoardHistory(boardResult);
-        console.log('place', boardHistory);
+        // console.log('place would be last history', boardHistory);
         setIsRedsNext(!isRedsNext);
 
         localStorage.setItem('Game result', JSON.stringify(boardResult));
