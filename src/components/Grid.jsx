@@ -11,8 +11,10 @@ const Grid = ({ eachGrid }) => {
     setIsRedsNext,
     checkIfWin,
     winner,
+    index,
     stopGame,
     setBoardHistory,
+    history,
   } = useContext(ContextProvider);
 
   const handlePlacedLocation = () => {
@@ -32,10 +34,43 @@ const Grid = ({ eachGrid }) => {
         const placeHere = wholeColumn.find(x => x[2] === 'white');
         placeHere[2] = isRedsNext ? 'red' : 'yellow';
 
+        if (history.length > index + 2) {
+          history.splice(index + 1);
+          console.log('current index ', index);
+          console.log(
+            'history.length if remove',
+            history.splice(index + 1).length
+          );
+        }
+
+        const playAudio = () => {
+          const sound = new Audio(
+            'http://www.chiptape.com/chiptape/sounds/medium/drop.wav'
+          );
+          console.log('sound', sound);
+          const playPromise = sound.play();
+
+          if (playPromise !== undefined) {
+            playPromise
+              .then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                console.log('audio played auto');
+              })
+              .catch(err => {
+                // Auto-play was prevented
+                // Show paused UI.
+                console.log('playback prevented');
+              });
+          }
+        };
+        playAudio();
+
         setBoardResult(boardResult);
         setBoardHistory(boardResult);
         // console.log('place would be last history', boardHistory);
         setIsRedsNext(!isRedsNext);
+        console.log('result history.length', history.length + 1);
 
         localStorage.setItem('Game result', JSON.stringify(boardResult));
 
