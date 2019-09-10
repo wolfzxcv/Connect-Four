@@ -11,8 +11,10 @@ const Grid = ({ eachGrid }) => {
     setIsRedsNext,
     checkIfWin,
     winner,
+    index,
     stopGame,
     setBoardHistory,
+    history,
   } = useContext(ContextProvider);
 
   const handlePlacedLocation = () => {
@@ -32,10 +34,20 @@ const Grid = ({ eachGrid }) => {
         const placeHere = wholeColumn.find(x => x[2] === 'white');
         placeHere[2] = isRedsNext ? 'red' : 'yellow';
 
+        if (history.length > index + 2) {
+          history.splice(index + 1);
+          console.log('current index ', index);
+          console.log(
+            'history.length if remove',
+            history.splice(index + 1).length
+          );
+        }
+
         setBoardResult(boardResult);
         setBoardHistory(boardResult);
         // console.log('place would be last history', boardHistory);
         setIsRedsNext(!isRedsNext);
+        console.log('result history.length', history.length + 1);
 
         localStorage.setItem('Game result', JSON.stringify(boardResult));
 
