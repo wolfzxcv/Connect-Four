@@ -43,6 +43,29 @@ const Grid = ({ eachGrid }) => {
           );
         }
 
+        const playAudio = () => {
+          const sound = new Audio(
+            'http://www.chiptape.com/chiptape/sounds/medium/drop.wav'
+          );
+          console.log('sound', sound);
+          const playPromise = sound.play();
+
+          if (playPromise !== undefined) {
+            playPromise
+              .then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                console.log('audio played auto');
+              })
+              .catch(err => {
+                // Auto-play was prevented
+                // Show paused UI.
+                console.log('playback prevented');
+              });
+          }
+        };
+        playAudio();
+
         setBoardResult(boardResult);
         setBoardHistory(boardResult);
         // console.log('place would be last history', boardHistory);
