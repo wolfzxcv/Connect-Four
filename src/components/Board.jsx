@@ -24,7 +24,7 @@ const Board = () => {
     const dataInLS = JSON.parse(localStorage.getItem('Game result'));
     setBoardResult(dataInLS || board);
     setBoardHistory(dataInLS || board);
-    console.log('render', boardHistory);
+    console.log('useEffect boardHistory', boardHistory);
 
     if (dataInLS) {
       checkWhoNext(dataInLS);

@@ -47,7 +47,6 @@ const Grid = ({ eachGrid }) => {
           const sound = new Audio(
             'http://www.chiptape.com/chiptape/sounds/medium/drop.wav'
           );
-          console.log('sound', sound);
           const playPromise = sound.play();
 
           if (playPromise !== undefined) {
@@ -55,7 +54,7 @@ const Grid = ({ eachGrid }) => {
               .then(() => {
                 // Automatic playback started!
                 // Show playing UI.
-                console.log('audio played auto');
+                // console.log('audio played auto');
               })
               .catch(() => {
                 // Auto-play was prevented
@@ -70,7 +69,7 @@ const Grid = ({ eachGrid }) => {
         setBoardHistory(boardResult);
         // console.log('place would be last history', boardHistory);
         setIsRedsNext(!isRedsNext);
-        console.log('result history.length', history.length + 1);
+        // console.log('result history.length', history.length + 1);
 
         localStorage.setItem('Game result', JSON.stringify(boardResult));
 
