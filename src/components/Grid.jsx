@@ -52,12 +52,12 @@ const Grid = ({ eachGrid }) => {
 
           if (playPromise !== undefined) {
             playPromise
-              .then(_ => {
+              .then(() => {
                 // Automatic playback started!
                 // Show playing UI.
                 console.log('audio played auto');
               })
-              .catch(err => {
+              .catch(() => {
                 // Auto-play was prevented
                 // Show paused UI.
                 console.log('playback prevented');
