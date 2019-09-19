@@ -1,12 +1,14 @@
 import React from 'react';
-import ContextProvider from './context/ContextProvider';
+import SharedContextProvider from './context/SharedContext';
+import Header from './components/Header';
 import Board from './components/Board';
 
 const App = () => {
   return (
-    <ContextProvider>
+    <SharedContextProvider>
+      <Header />
       <Board />
-    </ContextProvider>
+    </SharedContextProvider>
   );
 };
 

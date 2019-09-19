@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ContextProvider } from '../context/ContextProvider';
+import { SharedContext } from '../context/SharedContext';
 
 const Grid = ({ eachGrid }) => {
   const {
@@ -15,7 +15,7 @@ const Grid = ({ eachGrid }) => {
     stopGame,
     setBoardHistory,
     history,
-  } = useContext(ContextProvider);
+  } = useContext(SharedContext);
 
   const handlePlacedLocation = () => {
     // console.log('cell result', eachGrid);
@@ -47,17 +47,16 @@ const Grid = ({ eachGrid }) => {
           const sound = new Audio(
             'http://www.chiptape.com/chiptape/sounds/medium/drop.wav'
           );
-          console.log('sound', sound);
           const playPromise = sound.play();
 
           if (playPromise !== undefined) {
             playPromise
-              .then(_ => {
+              .then(() => {
                 // Automatic playback started!
                 // Show playing UI.
-                console.log('audio played auto');
+                // console.log('audio played auto');
               })
-              .catch(err => {
+              .catch(() => {
                 // Auto-play was prevented
                 // Show paused UI.
                 console.log('playback prevented');
@@ -70,7 +69,7 @@ const Grid = ({ eachGrid }) => {
         setBoardHistory(boardResult);
         // console.log('place would be last history', boardHistory);
         setIsRedsNext(!isRedsNext);
-        console.log('result history.length', history.length + 1);
+        // console.log('result history.length', history.length + 1);
 
         localStorage.setItem('Game result', JSON.stringify(boardResult));
 

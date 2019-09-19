@@ -5,13 +5,13 @@ const useStateHistory = initalArray => {
   const [index, setIndex] = useState(-2);
 
   const state = history;
+  console.log('state history', state);
 
   const setState = newResult => {
     const copyOldArrays = JSON.parse(JSON.stringify(history));
     setHistory([...copyOldArrays, newResult]);
     setIndex(index + 1);
-    // dunno why the last 2 data would be the same, so I remove the last one
-    console.log('set history', [...copyOldArrays, newResult].slice(0, -1));
+    console.log('set history', [...copyOldArrays, newResult]);
   };
 
   return [state, setState, { history, index, setIndex }];
