@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ContextProvider } from '../context/ContextProvider';
+import { SharedContext } from '../context/SharedContext';
 
 const Grid = ({ eachGrid }) => {
   const {
@@ -15,7 +15,7 @@ const Grid = ({ eachGrid }) => {
     stopGame,
     setBoardHistory,
     history,
-  } = useContext(ContextProvider);
+  } = useContext(SharedContext);
 
   const handlePlacedLocation = () => {
     // console.log('cell result', eachGrid);

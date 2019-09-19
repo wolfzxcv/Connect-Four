@@ -1,62 +1,53 @@
 import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Grid from './Grid';
-import { ContextProvider } from '../context/ContextProvider';
+import { SharedContext } from '../context/SharedContext';
 
 const Board = () => {
   const {
     board,
     boardResult,
     setBoardResult,
-    isRedsNext,
     checkWhoNext,
-    playAgain,
-    winner,
-    undo,
-    redo,
-    index,
-    history,
+    setPlayerName,
     boardHistory,
     setBoardHistory,
-  } = useContext(ContextProvider);
+  } = useContext(SharedContext);
 
   useEffect(() => {
     const dataInLS = JSON.parse(localStorage.getItem('Game result'));
+    const getPlayerName = JSON.parse(localStorage.getItem('player name'));
     setBoardResult(dataInLS || board);
     setBoardHistory(dataInLS || board);
     console.log('useEffect boardHistory', boardHistory);
+    setPlayerName(getPlayerName);
 
     if (dataInLS) {
       checkWhoNext(dataInLS);
+    } else {
+      let playerRed;
+      let playerYellow;
+      playerRed = prompt(`Please enter player 1's name`, 'Red');
+      playerYellow = prompt(`Please enter player 2's name`, 'Yellow');
+
+      // if input = '' or user press cancel, then set username as below
+      if (playerRed === null || playerRed === '') {
+        playerRed = 'Red';
+      }
+      if (playerYellow === null || playerYellow === '') {
+        playerYellow = 'Yellow';
+      }
+      setPlayerName({ red: playerRed, yellow: playerYellow });
+
+      localStorage.setItem(
+        'player name',
+        JSON.stringify({ red: playerRed, yellow: playerYellow })
+      );
     }
   }, []);
 
   return (
     <>
-      <p>
-        The first player to connect four of their discs <br />
-        horizontally, vertically, or diagonally wins the game.
-      </p>
-      <button type='button' onClick={() => playAgain()}>
-        Restart the game
-      </button>
-      {winner === '' ? (
-        <div> Next Player: {isRedsNext ? 'Red' : 'Yellow'}</div>
-      ) : (
-        <div>{`Winner is ${winner}`}</div>
-      )}
-
-      <button type='button' onClick={undo} disabled={index < 0}>
-        undo
-      </button>
-      <button
-        type='button'
-        onClick={redo}
-        disabled={index > history.length - 3}
-      >
-        redo
-      </button>
-
       <BoardSize>
         {boardResult.map(arr => (
           <Grid key={arr} eachGrid={arr} />
@@ -67,17 +58,16 @@ const Board = () => {
 };
 
 const BoardSize = styled.div`
+  margin: 0 auto;
   &:hover {
     cursor: pointer;
   }
 
   @media (min-width: 769px) {
-    margin-top: 150px;
     width: 1024px;
   }
 
   @media (max-width: 768px) {
-    margin-top: 50px;
     width: 700px;
   }
 `;

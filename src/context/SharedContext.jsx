@@ -1,9 +1,10 @@
 import React, { useState, createContext } from 'react';
+import { useMedia } from 'use-media';
 import useStateHistory from '../hook/useStateHistory';
 
-export const ContextProvider = createContext();
+export const SharedContext = createContext();
 
-export default props => {
+const SharedContextProvider = props => {
   const board = [];
   for (let y = 5; y >= 0; y -= 1) {
     for (let x = 0; x < 7; x += 1) {
@@ -21,6 +22,8 @@ export default props => {
   const [isRedsNext, setIsRedsNext] = useState(true);
   const [stopGame, setStopGame] = useState(false);
   const [winner, setWinner] = useState('');
+  const [playerName, setPlayerName] = useState({ red: '', yellow: '' });
+  const isLaptop = useMedia({ minWidth: 769 });
 
   const checkWhoNext = data => {
     const resultR = data.filter(x => x[2] === 'red');
@@ -147,7 +150,12 @@ export default props => {
     redo,
     index,
     history,
+    playerName,
+    setPlayerName,
+    isLaptop,
   };
 
-  return <ContextProvider.Provider value={value} {...props} />;
+  return <SharedContext.Provider value={value} {...props} />;
 };
+
+export default SharedContextProvider;
