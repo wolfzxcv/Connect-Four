@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Connect-Four/static/css/main.a1738c8f.chunk.css",
-    "main.js": "/Connect-Four/static/js/main.993ae75d.chunk.js",
-    "main.js.map": "/Connect-Four/static/js/main.993ae75d.chunk.js.map",
+    "main.css": "/Connect-Four/static/css/main.c3b712ed.chunk.css",
+    "main.js": "/Connect-Four/static/js/main.d49edab1.chunk.js",
+    "main.js.map": "/Connect-Four/static/js/main.d49edab1.chunk.js.map",
     "runtime~main.js": "/Connect-Four/static/js/runtime~main.117ffc4c.js",
     "runtime~main.js.map": "/Connect-Four/static/js/runtime~main.117ffc4c.js.map",
-    "static/js/2.385eed34.chunk.js": "/Connect-Four/static/js/2.385eed34.chunk.js",
-    "static/js/2.385eed34.chunk.js.map": "/Connect-Four/static/js/2.385eed34.chunk.js.map",
+    "static/js/2.31861fb2.chunk.js": "/Connect-Four/static/js/2.31861fb2.chunk.js",
+    "static/js/2.31861fb2.chunk.js.map": "/Connect-Four/static/js/2.31861fb2.chunk.js.map",
     "index.html": "/Connect-Four/index.html",
-    "precache-manifest.eb0c1336962d7614df2386a0d5d3bb67.js": "/Connect-Four/precache-manifest.eb0c1336962d7614df2386a0d5d3bb67.js",
+    "precache-manifest.0b97f179325ea5244651129147141a40.js": "/Connect-Four/precache-manifest.0b97f179325ea5244651129147141a40.js",
     "service-worker.js": "/Connect-Four/service-worker.js",
-    "static/css/main.a1738c8f.chunk.css.map": "/Connect-Four/static/css/main.a1738c8f.chunk.css.map"
+    "static/css/main.c3b712ed.chunk.css.map": "/Connect-Four/static/css/main.c3b712ed.chunk.css.map"
   }
 }
